@@ -34,6 +34,11 @@ pub struct Cli {
     #[clap(help_heading = "GLOBAL OPTIONS", global = true)]
     pub manifest_path: Option<PathBuf>,
 
+    /// Instead of running cargo-metadata, use the json file at this path
+    #[clap(long, parse(from_os_str))]
+    #[clap(help_heading = "GLOBAL OPTIONS", global = true)]
+    pub with_metadata: Option<PathBuf>,
+
     /// Don't use --all-features
     ///
     /// We default to passing --all-features to `cargo metadata`

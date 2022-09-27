@@ -40,6 +40,9 @@ Print version information
 #### `--manifest-path <PATH>`
 Path to Cargo.toml
 
+#### `--with-metadata <WITH_METADATA>`
+Instead of running cargo-metadata, use the json file at this path
+
 #### `--no-all-features`
 Don't use --all-features
 

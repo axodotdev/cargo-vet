@@ -200,7 +200,6 @@ fn test_project_suggest_json() {
     assert!(output.status.success(), "{}", output.status);
 }
 
-
 #[test]
 fn test_project_suggest_json_full() {
     let project = PathBuf::from(env!("CARGO_MANIFEST_DIR"))

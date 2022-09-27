@@ -310,38 +310,48 @@ fn real_main() -> Result<(), miette::Report> {
     let cli = &partial_cfg.cli;
     let cargo_path = std::env::var_os(CARGO_ENV).expect("Cargo failed to set $CARGO, how?");
 
-    let mut cmd = cargo_metadata::MetadataCommand::new();
-    cmd.cargo_path(cargo_path);
-    if let Some(manifest_path) = &cli.manifest_path {
-        cmd.manifest_path(manifest_path);
-    }
-    if !cli.no_all_features {
-        cmd.features(cargo_metadata::CargoOpt::AllFeatures);
-    }
-    if cli.no_default_features {
-        cmd.features(cargo_metadata::CargoOpt::NoDefaultFeatures);
-    }
-    if !cli.features.is_empty() {
-        cmd.features(cargo_metadata::CargoOpt::SomeFeatures(cli.features.clone()));
-    }
-    // We never want cargo-vet to update the Cargo.lock.
-    // For frozen runs we also don't want to touch the network.
-    let mut other_options = Vec::new();
-    if cli.frozen {
-        other_options.push("--frozen".to_string());
-    } else {
-        other_options.push("--locked".to_string());
-    }
-    cmd.other_options(other_options);
-
-    info!("Running: {:#?}", cmd.cargo_command());
-
-    // ERRORS: immediate fatal diagnostic
-    let metadata = {
-        let _spinner = indeterminate_spinner("Running", "`cargo metadata`");
-        cmd.exec()
+    let metadata = if let Some(with_metadata) = &cli.with_metadata {
+        let file = File::open(with_metadata)
             .into_diagnostic()
-            .wrap_err("'cargo metadata' exited unsuccessfully")?
+            .wrap_err("could not open --with-metadata path")?;
+        let reader = BufReader::new(file);
+        serde_json::from_reader(reader)
+            .into_diagnostic()
+            .wrap_err("couldn't parse --with-metadata file")?
+    } else {
+        let mut cmd = cargo_metadata::MetadataCommand::new();
+        cmd.cargo_path(cargo_path);
+        if let Some(manifest_path) = &cli.manifest_path {
+            cmd.manifest_path(manifest_path);
+        }
+        if !cli.no_all_features {
+            cmd.features(cargo_metadata::CargoOpt::AllFeatures);
+        }
+        if cli.no_default_features {
+            cmd.features(cargo_metadata::CargoOpt::NoDefaultFeatures);
+        }
+        if !cli.features.is_empty() {
+            cmd.features(cargo_metadata::CargoOpt::SomeFeatures(cli.features.clone()));
+        }
+        // We never want cargo-vet to update the Cargo.lock.
+        // For frozen runs we also don't want to touch the network.
+        let mut other_options = Vec::new();
+        if cli.frozen {
+            other_options.push("--frozen".to_string());
+        } else {
+            other_options.push("--locked".to_string());
+        }
+        cmd.other_options(other_options);
+
+        info!("Running: {:#?}", cmd.cargo_command());
+
+        // ERRORS: immediate fatal diagnostic
+        {
+            let _spinner = indeterminate_spinner("Running", "`cargo metadata`");
+            cmd.exec()
+                .into_diagnostic()
+                .wrap_err("'cargo metadata' exited unsuccessfully")?
+        }
     };
 
     // trace!("Got Metadata! {:#?}", metadata);
@@ -1282,7 +1292,9 @@ fn cmd_suggest(
             .print_suggest_human(out, cfg, suggest.as_ref())
             .into_diagnostic()?,
         OutputFormat::Json => report.print_json(out, None, suggest.as_ref())?,
-        OutputFormat::JsonFull => report.print_json(out, Some((cfg, &suggest_store.audits)), suggest.as_ref())?,
+        OutputFormat::JsonFull => {
+            report.print_json(out, Some((cfg, &suggest_store.audits)), suggest.as_ref())?
+        }
     }
 
     Ok(())
@@ -1515,7 +1527,9 @@ fn cmd_check(out: &Arc<dyn Out>, cfg: &Config, sub_args: &CheckArgs) -> Result<(
             .print_human(out, cfg, suggest.as_ref())
             .into_diagnostic()?,
         OutputFormat::Json => report.print_json(out, None, suggest.as_ref())?,
-        OutputFormat::JsonFull => report.print_json(out, Some((cfg, &store.audits)), suggest.as_ref())?,
+        OutputFormat::JsonFull => {
+            report.print_json(out, Some((cfg, &store.audits)), suggest.as_ref())?
+        }
     }
 
     // Only save imports if we succeeded, to avoid any modifications on error.
