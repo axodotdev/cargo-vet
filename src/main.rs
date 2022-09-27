@@ -1281,7 +1281,8 @@ fn cmd_suggest(
         OutputFormat::Human => report
             .print_suggest_human(out, cfg, suggest.as_ref())
             .into_diagnostic()?,
-        OutputFormat::Json => report.print_json(out, cfg, suggest.as_ref())?,
+        OutputFormat::Json => report.print_json(out, None, suggest.as_ref())?,
+        OutputFormat::JsonFull => report.print_json(out, Some(cfg), suggest.as_ref())?,
     }
 
     Ok(())
@@ -1513,7 +1514,8 @@ fn cmd_check(out: &Arc<dyn Out>, cfg: &Config, sub_args: &CheckArgs) -> Result<(
         OutputFormat::Human => report
             .print_human(out, cfg, suggest.as_ref())
             .into_diagnostic()?,
-        OutputFormat::Json => report.print_json(out, cfg, suggest.as_ref())?,
+        OutputFormat::Json => report.print_json(out, None, suggest.as_ref())?,
+        OutputFormat::JsonFull => report.print_json(out, Some(cfg), suggest.as_ref())?,
     }
 
     // Only save imports if we succeeded, to avoid any modifications on error.
@@ -1733,7 +1735,7 @@ fn cmd_dump_graph(
     let graph = resolver::DepGraph::new(&cfg.metadata, cfg.cli.filter_graph.as_ref(), None);
     match cfg.cli.output_format {
         OutputFormat::Human => graph.print_mermaid(out, sub_args).into_diagnostic()?,
-        OutputFormat::Json => {
+        OutputFormat::Json | OutputFormat::JsonFull => {
             serde_json::to_writer_pretty(&**out, &graph.nodes).into_diagnostic()?
         }
     }

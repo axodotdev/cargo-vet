@@ -50,7 +50,7 @@ GLOBAL OPTIONS:
             Instead of stderr, write logs to this file (only used after successful CLI parsing)
 
         --output-format <OUTPUT_FORMAT>
-            The format of the output [default: human] [possible values: human, json]
+            The format of the output [default: human] [possible values: human, json, json-full]
 
         --diff-cache <DIFF_CACHE>
             Use the following path as the diff-cache
@@ -70,6 +70,8 @@ SUBCOMMANDS:
     record-violation    Declare that some versions of a package violate certain audit criteria
     fmt                 Reformat all of vet's files (in case you hand-edited them)
     fetch-imports       Explicitly fetch the imports (foreign audit files)
+    aggregate           Fetch and merge audits from multiple sources into a single `audits.toml`
+                            file
     dump-graph          Print the cargo build graph as understood by `cargo vet`
     gc                  Clean up old packages from the vet cache
     help                Print this message or the help of the given subcommand(s)

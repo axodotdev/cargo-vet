@@ -70,7 +70,7 @@ GLOBAL OPTIONS:
             The format of the output
             
             [default: human]
-            [possible values: human, json]
+            [possible values: human, json, json-full]
 
         --diff-cache <DIFF_CACHE>
             Use the following path as the diff-cache
@@ -149,6 +149,8 @@ SUBCOMMANDS:
             Reformat all of vet's files (in case you hand-edited them)
     fetch-imports
             Explicitly fetch the imports (foreign audit files)
+    aggregate
+            Fetch and merge audits from multiple sources into a single `audits.toml` file
     dump-graph
             Print the cargo build graph as understood by `cargo vet`
     gc
