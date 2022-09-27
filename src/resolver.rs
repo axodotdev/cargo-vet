@@ -2814,14 +2814,14 @@ impl<'a> ResolveReport<'a> {
     pub fn print_json(
         &self,
         out: &Arc<dyn Out>,
-        cfg: Option<&Config>,
+        cfg: Option<(&Config, &AuditsFile)>,
         suggest: Option<&Suggest>,
     ) -> Result<(), miette::Report> {
         let result = JsonReport {
-            context: cfg.map(|cfg| JsonReportContext {
+            context: cfg.map(|(cfg, audits)| JsonReportContext {
                 metadata: cfg.metadata.clone(),
                 store_path: cfg.metacfg.store_path().display().to_string(),
-                criteria: SortedMap::new(),
+                criteria: audits.criteria.clone(),
             }),
             conclusion: match &self.conclusion {
                 Conclusion::Success(success) => {
