@@ -1515,8 +1515,8 @@ fn cmd_check(out: &Arc<dyn Out>, cfg: &Config, sub_args: &CheckArgs) -> Result<(
         },
     );
 
-    // Bare `cargo vet` shouldn't suggest in CI
-    let suggest = if !cfg.cli.locked {
+    // Bare `cargo vet` shouldn't suggest in CI (unless you want --json-full)
+    let suggest = if !cfg.cli.locked || cfg.cli.output_format == OutputFormat::JsonFull {
         report.compute_suggest(cfg, network.as_ref(), true)?
     } else {
         None
