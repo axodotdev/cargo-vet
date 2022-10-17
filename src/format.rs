@@ -616,4 +616,5 @@ pub struct JsonSuggestItem {
     pub notable_parents: String,
     pub suggested_criteria: Vec<CriteriaName>,
     pub suggested_diff: DiffRecommendation,
+    pub confident: bool,
 }

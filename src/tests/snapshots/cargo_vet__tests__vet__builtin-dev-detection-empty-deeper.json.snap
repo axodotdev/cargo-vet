@@ -64,7 +64,8 @@ expression: json
             "raw": "+100",
             "count": 100
           }
-        }
+        },
+        "confident": true
       },
       {
         "name": "dev-cycle-direct",
@@ -79,7 +80,8 @@ expression: json
             "raw": "+100",
             "count": 100
           }
-        }
+        },
+        "confident": true
       },
       {
         "name": "normal",
@@ -94,7 +96,8 @@ expression: json
             "raw": "+100",
             "count": 100
           }
-        }
+        },
+        "confident": true
       },
       {
         "name": "simple-dev",
@@ -109,7 +112,8 @@ expression: json
             "raw": "+100",
             "count": 100
           }
-        }
+        },
+        "confident": true
       },
       {
         "name": "dev-cycle-indirect",
@@ -124,7 +128,8 @@ expression: json
             "raw": "+100",
             "count": 100
           }
-        }
+        },
+        "confident": false
       },
       {
         "name": "simple-dev-indirect",
@@ -139,7 +144,8 @@ expression: json
             "raw": "+100",
             "count": 100
           }
-        }
+        },
+        "confident": false
       }
     ],
     "suggest_by_criteria": {
@@ -157,7 +163,8 @@ expression: json
               "raw": "+100",
               "count": 100
             }
-          }
+          },
+          "confident": true
         },
         {
           "name": "normal",
@@ -172,7 +179,8 @@ expression: json
               "raw": "+100",
               "count": 100
             }
-          }
+          },
+          "confident": true
         }
       ],
       "safe-to-run": [
@@ -189,7 +197,8 @@ expression: json
               "raw": "+100",
               "count": 100
             }
-          }
+          },
+          "confident": true
         },
         {
           "name": "simple-dev",
@@ -204,7 +213,8 @@ expression: json
               "raw": "+100",
               "count": 100
             }
-          }
+          },
+          "confident": true
         },
         {
           "name": "dev-cycle-indirect",
@@ -219,7 +229,8 @@ expression: json
               "raw": "+100",
               "count": 100
             }
-          }
+          },
+          "confident": false
         },
         {
           "name": "simple-dev-indirect",
@@ -234,7 +245,8 @@ expression: json
               "raw": "+100",
               "count": 100
             }
-          }
+          },
+          "confident": false
         }
       ]
     },

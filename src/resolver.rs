@@ -2874,6 +2874,7 @@ impl<'a> ResolveReport<'a> {
                                 .map(|s| s.to_owned())
                                 .collect(),
                             suggested_diff: item.suggested_diff.clone(),
+                            confident: item.suggested_criteria.is_fully_confident(),
                         }
                     };
                     JsonReportConclusion::FailForVet(JsonReportFailForVet {

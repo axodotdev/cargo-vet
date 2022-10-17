@@ -29,7 +29,8 @@ expression: json
             "raw": "+75",
             "count": 75
           }
-        }
+        },
+        "confident": true
       }
     ],
     "suggest_by_criteria": {
@@ -47,7 +48,8 @@ expression: json
               "raw": "+75",
               "count": 75
             }
-          }
+          },
+          "confident": true
         }
       ]
     },

@@ -36,7 +36,8 @@ expression: json
             "raw": "+100",
             "count": 100
           }
-        }
+        },
+        "confident": true
       },
       {
         "name": "normal",
@@ -51,7 +52,8 @@ expression: json
             "raw": "+100",
             "count": 100
           }
-        }
+        },
+        "confident": true
       }
     ],
     "suggest_by_criteria": {
@@ -69,7 +71,8 @@ expression: json
               "raw": "+100",
               "count": 100
             }
-          }
+          },
+          "confident": true
         }
       ],
       "safe-to-run": [
@@ -86,7 +89,8 @@ expression: json
               "raw": "+100",
               "count": 100
             }
-          }
+          },
+          "confident": true
         }
       ]
     },
