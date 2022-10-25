@@ -2818,9 +2818,9 @@ impl<'a> ResolveReport<'a> {
         suggest: Option<&Suggest>,
     ) -> Result<(), miette::Report> {
         let result = JsonReport {
-            context: cfg.map(|(cfg, audits)| JsonReportContext {
-                metadata: cfg.metadata.clone(),
-                store_path: cfg.metacfg.store_path().display().to_string(),
+            context: cfg.map(|(_cfg, audits)| JsonReportContext {
+                // metadata: cfg.metadata.clone(),
+                // store_path: cfg.metacfg.store_path().display().to_string(),
                 criteria: audits.criteria.clone(),
             }),
             conclusion: match &self.conclusion {

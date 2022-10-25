@@ -93,7 +93,8 @@ stdout:
             "raw": " 11 files changed, 938 insertions(+)\n",
             "count": 938
           }
-        }
+        },
+        "confident": true
       },
       {
         "name": "termcolor",
@@ -108,7 +109,8 @@ stdout:
             "raw": " 12 files changed, 2585 insertions(+)\n",
             "count": 2585
           }
-        }
+        },
+        "confident": true
       },
       {
         "name": "os_str_bytes",
@@ -123,7 +125,8 @@ stdout:
             "raw": " 23 files changed, 2918 insertions(+)\n",
             "count": 2918
           }
-        }
+        },
+        "confident": true
       },
       {
         "name": "textwrap",
@@ -138,7 +141,8 @@ stdout:
             "raw": " 18 files changed, 6165 insertions(+)\n",
             "count": 6165
           }
-        }
+        },
+        "confident": true
       },
       {
         "name": "indexmap",
@@ -153,7 +157,8 @@ stdout:
             "raw": " 33 files changed, 9452 insertions(+)\n",
             "count": 9452
           }
-        }
+        },
+        "confident": true
       },
       {
         "name": "reqwest",
@@ -168,7 +173,8 @@ stdout:
             "raw": " 63 files changed, 21663 insertions(+)\n",
             "count": 21663
           }
-        }
+        },
+        "confident": true
       },
       {
         "name": "serde_json",
@@ -183,7 +189,8 @@ stdout:
             "raw": " 88 files changed, 22855 insertions(+)\n",
             "count": 22855
           }
-        }
+        },
+        "confident": true
       },
       {
         "name": "tokio",
@@ -198,7 +205,8 @@ stdout:
             "raw": " 405 files changed, 91278 insertions(+)\n",
             "count": 91278
           }
-        }
+        },
+        "confident": true
       },
       {
         "name": "libc",
@@ -213,7 +221,8 @@ stdout:
             "raw": " 217 files changed, 94067 insertions(+)\n",
             "count": 94067
           }
-        }
+        },
+        "confident": true
       },
       {
         "name": "winapi",
@@ -228,7 +237,8 @@ stdout:
             "raw": " 412 files changed, 181329 insertions(+)\n",
             "count": 181329
           }
-        }
+        },
+        "confident": true
       }
     ],
     "suggest_by_criteria": {
@@ -246,7 +256,8 @@ stdout:
               "raw": " 12 files changed, 2585 insertions(+)\n",
               "count": 2585
             }
-          }
+          },
+          "confident": true
         },
         {
           "name": "os_str_bytes",
@@ -261,7 +272,8 @@ stdout:
               "raw": " 23 files changed, 2918 insertions(+)\n",
               "count": 2918
             }
-          }
+          },
+          "confident": true
         },
         {
           "name": "textwrap",
@@ -276,7 +288,8 @@ stdout:
               "raw": " 18 files changed, 6165 insertions(+)\n",
               "count": 6165
             }
-          }
+          },
+          "confident": true
         },
         {
           "name": "indexmap",
@@ -291,7 +304,8 @@ stdout:
               "raw": " 33 files changed, 9452 insertions(+)\n",
               "count": 9452
             }
-          }
+          },
+          "confident": true
         },
         {
           "name": "reqwest",
@@ -306,7 +320,8 @@ stdout:
               "raw": " 63 files changed, 21663 insertions(+)\n",
               "count": 21663
             }
-          }
+          },
+          "confident": true
         },
         {
           "name": "serde_json",
@@ -321,7 +336,8 @@ stdout:
               "raw": " 88 files changed, 22855 insertions(+)\n",
               "count": 22855
             }
-          }
+          },
+          "confident": true
         },
         {
           "name": "tokio",
@@ -336,7 +352,8 @@ stdout:
               "raw": " 405 files changed, 91278 insertions(+)\n",
               "count": 91278
             }
-          }
+          },
+          "confident": true
         }
       ],
       "safe-to-run": [
@@ -353,7 +370,8 @@ stdout:
               "raw": " 11 files changed, 938 insertions(+)\n",
               "count": 938
             }
-          }
+          },
+          "confident": true
         },
         {
           "name": "libc",
@@ -368,7 +386,8 @@ stdout:
               "raw": " 217 files changed, 94067 insertions(+)\n",
               "count": 94067
             }
-          }
+          },
+          "confident": true
         },
         {
           "name": "winapi",
@@ -383,7 +402,8 @@ stdout:
               "raw": " 412 files changed, 181329 insertions(+)\n",
               "count": 181329
             }
-          }
+          },
+          "confident": true
         }
       ]
     },

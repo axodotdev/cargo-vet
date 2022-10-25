@@ -562,8 +562,8 @@ pub struct JsonReport {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct JsonReportContext {
-    pub metadata: cargo_metadata::Metadata,
-    pub store_path: String,
+    // pub metadata: cargo_metadata::Metadata,
+    // pub store_path: String,
     pub criteria: SortedMap<CriteriaName, CriteriaEntry>,
 }
 
