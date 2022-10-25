@@ -3,52 +3,151 @@ source: src/tests/vet.rs
 expression: json
 ---
 {
+  "context": null,
   "conclusion": "fail (vetting)",
   "failures": [
     {
-      "missing_criteria": [
-        "safe-to-deploy"
-      ],
       "name": "both",
-      "version": "10.0.0"
-    },
-    {
-      "missing_criteria": [
-        "safe-to-run"
-      ],
-      "name": "dev-cycle-direct",
-      "version": "10.0.0"
-    },
-    {
-      "missing_criteria": [
-        "safe-to-run"
-      ],
-      "name": "dev-cycle-indirect",
-      "version": "10.0.0"
-    },
-    {
+      "version": "10.0.0",
       "missing_criteria": [
         "safe-to-deploy"
-      ],
+      ]
+    },
+    {
+      "name": "dev-cycle-direct",
+      "version": "10.0.0",
+      "missing_criteria": [
+        "safe-to-run"
+      ]
+    },
+    {
+      "name": "dev-cycle-indirect",
+      "version": "10.0.0",
+      "missing_criteria": [
+        "safe-to-run"
+      ]
+    },
+    {
       "name": "normal",
-      "version": "10.0.0"
+      "version": "10.0.0",
+      "missing_criteria": [
+        "safe-to-deploy"
+      ]
     },
     {
-      "missing_criteria": [
-        "safe-to-run"
-      ],
       "name": "simple-dev",
-      "version": "10.0.0"
-    },
-    {
+      "version": "10.0.0",
       "missing_criteria": [
         "safe-to-run"
-      ],
+      ]
+    },
+    {
       "name": "simple-dev-indirect",
-      "version": "10.0.0"
+      "version": "10.0.0",
+      "missing_criteria": [
+        "safe-to-run"
+      ]
     }
   ],
   "suggest": {
+    "suggestions": [
+      {
+        "name": "both",
+        "notable_parents": "root",
+        "suggested_criteria": [
+          "safe-to-deploy"
+        ],
+        "suggested_diff": {
+          "from": null,
+          "to": "10.0.0",
+          "diffstat": {
+            "raw": "+100",
+            "count": 100
+          }
+        },
+        "confident": true
+      },
+      {
+        "name": "dev-cycle-direct",
+        "notable_parents": "root",
+        "suggested_criteria": [
+          "safe-to-run"
+        ],
+        "suggested_diff": {
+          "from": null,
+          "to": "10.0.0",
+          "diffstat": {
+            "raw": "+100",
+            "count": 100
+          }
+        },
+        "confident": true
+      },
+      {
+        "name": "normal",
+        "notable_parents": "root",
+        "suggested_criteria": [
+          "safe-to-deploy"
+        ],
+        "suggested_diff": {
+          "from": null,
+          "to": "10.0.0",
+          "diffstat": {
+            "raw": "+100",
+            "count": 100
+          }
+        },
+        "confident": true
+      },
+      {
+        "name": "simple-dev",
+        "notable_parents": "root",
+        "suggested_criteria": [
+          "safe-to-run"
+        ],
+        "suggested_diff": {
+          "from": null,
+          "to": "10.0.0",
+          "diffstat": {
+            "raw": "+100",
+            "count": 100
+          }
+        },
+        "confident": true
+      },
+      {
+        "name": "dev-cycle-indirect",
+        "notable_parents": "dev-cycle-direct",
+        "suggested_criteria": [
+          "safe-to-run"
+        ],
+        "suggested_diff": {
+          "from": null,
+          "to": "10.0.0",
+          "diffstat": {
+            "raw": "+100",
+            "count": 100
+          }
+        },
+        "confident": false
+      },
+      {
+        "name": "simple-dev-indirect",
+        "notable_parents": "simple-dev",
+        "suggested_criteria": [
+          "safe-to-run"
+        ],
+        "suggested_diff": {
+          "from": null,
+          "to": "10.0.0",
+          "diffstat": {
+            "raw": "+100",
+            "count": 100
+          }
+        },
+        "confident": false
+      }
+    ],
     "suggest_by_criteria": {
       "safe-to-deploy": [
         {
@@ -58,13 +157,14 @@ expression: json
             "safe-to-deploy"
           ],
           "suggested_diff": {
-            "diffstat": {
-              "count": 100,
-              "raw": "+100"
-            },
             "from": null,
-            "to": "10.0.0"
-          }
+            "to": "10.0.0",
+            "diffstat": {
+              "raw": "+100",
+              "count": 100
+            }
+          },
+          "confident": true
         },
         {
           "name": "normal",
@@ -73,13 +173,14 @@ expression: json
             "safe-to-deploy"
           ],
           "suggested_diff": {
-            "diffstat": {
-              "count": 100,
-              "raw": "+100"
-            },
             "from": null,
-            "to": "10.0.0"
-          }
+            "to": "10.0.0",
+            "diffstat": {
+              "raw": "+100",
+              "count": 100
+            }
+          },
+          "confident": true
         }
       ],
       "safe-to-run": [
@@ -90,13 +191,14 @@ expression: json
             "safe-to-run"
           ],
           "suggested_diff": {
-            "diffstat": {
-              "count": 100,
-              "raw": "+100"
-            },
             "from": null,
-            "to": "10.0.0"
-          }
+            "to": "10.0.0",
+            "diffstat": {
+              "raw": "+100",
+              "count": 100
+            }
+          },
+          "confident": true
         },
         {
           "name": "simple-dev",
@@ -105,13 +207,14 @@ expression: json
             "safe-to-run"
           ],
           "suggested_diff": {
-            "diffstat": {
-              "count": 100,
-              "raw": "+100"
-            },
             "from": null,
-            "to": "10.0.0"
-          }
+            "to": "10.0.0",
+            "diffstat": {
+              "raw": "+100",
+              "count": 100
+            }
+          },
+          "confident": true
         },
         {
           "name": "dev-cycle-indirect",
@@ -120,13 +223,14 @@ expression: json
             "safe-to-run"
           ],
           "suggested_diff": {
-            "diffstat": {
-              "count": 100,
-              "raw": "+100"
-            },
             "from": null,
-            "to": "10.0.0"
-          }
+            "to": "10.0.0",
+            "diffstat": {
+              "raw": "+100",
+              "count": 100
+            }
+          },
+          "confident": false
         },
         {
           "name": "simple-dev-indirect",
@@ -135,108 +239,17 @@ expression: json
             "safe-to-run"
           ],
           "suggested_diff": {
-            "diffstat": {
-              "count": 100,
-              "raw": "+100"
-            },
             "from": null,
-            "to": "10.0.0"
-          }
+            "to": "10.0.0",
+            "diffstat": {
+              "raw": "+100",
+              "count": 100
+            }
+          },
+          "confident": false
         }
       ]
     },
-    "suggestions": [
-      {
-        "name": "both",
-        "notable_parents": "root",
-        "suggested_criteria": [
-          "safe-to-deploy"
-        ],
-        "suggested_diff": {
-          "diffstat": {
-            "count": 100,
-            "raw": "+100"
-          },
-          "from": null,
-          "to": "10.0.0"
-        }
-      },
-      {
-        "name": "dev-cycle-direct",
-        "notable_parents": "root",
-        "suggested_criteria": [
-          "safe-to-run"
-        ],
-        "suggested_diff": {
-          "diffstat": {
-            "count": 100,
-            "raw": "+100"
-          },
-          "from": null,
-          "to": "10.0.0"
-        }
-      },
-      {
-        "name": "normal",
-        "notable_parents": "root",
-        "suggested_criteria": [
-          "safe-to-deploy"
-        ],
-        "suggested_diff": {
-          "diffstat": {
-            "count": 100,
-            "raw": "+100"
-          },
-          "from": null,
-          "to": "10.0.0"
-        }
-      },
-      {
-        "name": "simple-dev",
-        "notable_parents": "root",
-        "suggested_criteria": [
-          "safe-to-run"
-        ],
-        "suggested_diff": {
-          "diffstat": {
-            "count": 100,
-            "raw": "+100"
-          },
-          "from": null,
-          "to": "10.0.0"
-        }
-      },
-      {
-        "name": "dev-cycle-indirect",
-        "notable_parents": "dev-cycle-direct",
-        "suggested_criteria": [
-          "safe-to-run"
-        ],
-        "suggested_diff": {
-          "diffstat": {
-            "count": 100,
-            "raw": "+100"
-          },
-          "from": null,
-          "to": "10.0.0"
-        }
-      },
-      {
-        "name": "simple-dev-indirect",
-        "notable_parents": "simple-dev",
-        "suggested_criteria": [
-          "safe-to-run"
-        ],
-        "suggested_diff": {
-          "diffstat": {
-            "count": 100,
-            "raw": "+100"
-          },
-          "from": null,
-          "to": "10.0.0"
-        }
-      }
-    ],
     "total_lines": 600
   }
 }

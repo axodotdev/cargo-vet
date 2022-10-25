@@ -34,6 +34,11 @@ pub struct Cli {
     #[clap(help_heading = "GLOBAL OPTIONS", global = true)]
     pub manifest_path: Option<PathBuf>,
 
+    /// Instead of running cargo-metadata, use the json file at this path
+    #[clap(long, parse(from_os_str))]
+    #[clap(help_heading = "GLOBAL OPTIONS", global = true)]
+    pub with_metadata: Option<PathBuf>,
+
     /// Don't use --all-features
     ///
     /// We default to passing --all-features to `cargo metadata`
@@ -678,8 +683,20 @@ pub enum FetchMode {
 
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, ValueEnum)]
 pub enum OutputFormat {
+    /// Print output in a human-readable form.
     Human,
+    /// Print output in a machine-readable form with minimal extra context.
     Json,
+    /// Print output in a machine-readable form with as much additional context
+    /// as possible to enable another tool to operate on that information.
+    ///
+    /// Extra information will be stored in a top-level 'context' field and
+    /// include:
+    ///
+    /// * criteria: The criteria this project defines (and their descriptions)
+    /// * metadata: The output of cargo-metadata
+    /// * store: The location of the store (supply-chain dir)
+    JsonFull,
 }
 
 #[derive(Clone, Debug)]

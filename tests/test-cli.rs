@@ -201,6 +201,31 @@ fn test_project_suggest_json() {
 }
 
 #[test]
+fn test_project_suggest_json_full() {
+    let project = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+        .join("tests")
+        .join("test-project");
+    let bin = env!("CARGO_BIN_EXE_cargo-vet");
+    let output = Command::new(bin)
+        .current_dir(&project)
+        .arg("vet")
+        .arg("suggest")
+        .arg("--diff-cache")
+        .arg("../diff-cache.toml")
+        .arg("--manifest-path")
+        .arg("Cargo.toml")
+        .arg("--output-format=json-full")
+        .stdout(Stdio::piped())
+        .stderr(Stdio::piped())
+        .output()
+        .unwrap();
+
+    // Can't snapshot this because cargo-metadata has some HashMaps :(
+    // insta::assert_snapshot!(format_outputs(&output));
+    assert!(output.status.success(), "{}", output.status);
+}
+
+#[test]
 fn test_project_suggest_shallow() {
     let project = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
         .join("tests")

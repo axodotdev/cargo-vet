@@ -1,5 +1,6 @@
 //! Details of the file formats used by cargo vet
 
+use crate::resolver::{DiffRecommendation, ViolationConflict};
 use crate::serialization::spanned::Spanned;
 use crate::{flock::Filesystem, serialization};
 use core::{cmp, fmt};
@@ -531,4 +532,89 @@ impl FetchCommand {
 pub struct CommandHistory {
     #[serde(flatten)]
     pub last_fetch: Option<FetchCommand>,
+}
+
+////////////////////////////////////////////////////////////////////////////////////
+//                                                                                //
+//                                                                                //
+//                                                                                //
+//                             <json report output>                               //
+//                                                                                //
+//                                                                                //
+//                                                                                //
+////////////////////////////////////////////////////////////////////////////////////
+
+/// A string of the form "package:version"
+pub type PackageAndVersion = String;
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct JsonPackage {
+    pub name: PackageName,
+    pub version: Version,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct JsonReport {
+    pub context: Option<JsonReportContext>,
+    #[serde(flatten)]
+    pub conclusion: JsonReportConclusion,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct JsonReportContext {
+    // pub metadata: cargo_metadata::Metadata,
+    // pub store_path: String,
+    pub criteria: SortedMap<CriteriaName, CriteriaEntry>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(tag = "conclusion")]
+pub enum JsonReportConclusion {
+    #[serde(rename = "success")]
+    Success(JsonReportSuccess),
+    #[serde(rename = "fail (violation)")]
+    FailForViolationConflict(JsonReportFailForViolationConflict),
+    #[serde(rename = "fail (vetting)")]
+    FailForVet(JsonReportFailForVet),
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct JsonReportSuccess {
+    pub vetted_fully: Vec<JsonPackage>,
+    pub vetted_partially: Vec<JsonPackage>,
+    pub vetted_with_exemptions: Vec<JsonPackage>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct JsonReportFailForViolationConflict {
+    pub violations: SortedMap<PackageAndVersion, Vec<ViolationConflict>>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct JsonReportFailForVet {
+    pub failures: Vec<JsonVetFailure>,
+    pub suggest: Option<JsonSuggest>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct JsonSuggest {
+    pub suggestions: Vec<JsonSuggestItem>,
+    pub suggest_by_criteria: SortedMap<CriteriaName, Vec<JsonSuggestItem>>,
+    pub total_lines: u64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct JsonVetFailure {
+    pub name: PackageName,
+    pub version: Version,
+    pub missing_criteria: Vec<CriteriaName>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct JsonSuggestItem {
+    pub name: PackageName,
+    pub notable_parents: String,
+    pub suggested_criteria: Vec<CriteriaName>,
+    pub suggested_diff: DiffRecommendation,
+    pub confident: bool,
 }
